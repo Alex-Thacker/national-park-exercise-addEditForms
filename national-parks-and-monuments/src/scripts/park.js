@@ -71,3 +71,80 @@ if (parkObject.visited === false){
 
   return editFormFragment
 }
+
+
+
+/////////////
+const buildMonuments = monumentObject => {
+
+  const monumentArticle = buildElement("article", `monument--${monumentObject.id}`)
+  monumentArticle.appendChild(buildElement("h3", undefined, monumentObject.name));
+  monumentArticle.appendChild(buildElement("p", undefined, monumentObject.state));
+
+  let editMonumentButton = buildElement("button", undefined, "Edit Monument")
+  let deleteMonumentButton = buildElement("button", undefined, "Delete Monument")
+  monumentArticle.appendChild(editMonumentButton)
+  monumentArticle.appendChild(deleteMonumentButton)
+  editMonumentButton.addEventListener("click", editMonumentForm)
+  deleteMonumentButton.addEventListener("click", monumentDelete)
+  return monumentArticle
+}
+
+
+const monumentForm = (monumentObject) => {
+  let monumentFragment = document.createDocumentFragment()
+
+  monumentFragment.appendChild(buildElement("label", undefined, "Name: "))
+  monumentFragment.appendChild(buildElement("input", `edit-monument-name--${monumentObject.id}`, undefined, monumentObject.name))
+
+  monumentFragment.appendChild(buildElement("label", undefined, "State: "))
+  monumentFragment.appendChild(buildElement("input", `edit-monument-state--${monumentObject.id}`, undefined, monumentObject.state))
+
+  monumentFragment.appendChild(buildElement("label", undefined, "Area: "))
+  monumentFragment.appendChild(buildElement("input", `edit-monument-area--${monumentObject.id}`, undefined, monumentObject.area))
+
+  monumentFragment.appendChild(buildElement("label", undefined, "Date established: "))
+  monumentFragment.appendChild(buildElement("input", `edit-monument-dateEstablished--${monumentObject.id}`, undefined, monumentObject.dateEstablished))
+
+  
+  
+  //radio button begins
+  monumentFragment.appendChild(buildElement("legend", undefined, "Have you been here?"))
+  
+  const trueRadio = buildElement("input", `edit-true--${monumentObject.id}`, undefined, "true")
+  trueRadio.type = "radio"
+  trueRadio.name = "test2"
+  monumentFragment.appendChild(trueRadio)
+  monumentFragment.appendChild(buildElement("label", undefined, "Yes", "true"))
+  
+  const falseRadio = buildElement("input", `edit-false--${monumentObject.id}`, undefined, "false")
+  falseRadio.type = "radio"
+  falseRadio.name = "test2"
+  monumentFragment.appendChild(falseRadio)
+  monumentFragment.appendChild(buildElement("label", undefined, "No", "false"))
+  
+  if (monumentObject.visited === true){
+    trueRadio.checked = true
+  } 
+  
+  if (monumentObject.visited === false){
+    falseRadio.checked = true
+  }
+  
+  const lineBreak = document.createElement("br")
+  monumentFragment.appendChild(lineBreak)
+  
+  let saveChangesButton = buildElement("button", undefined, "Save changes")
+  monumentFragment.appendChild(saveChangesButton)
+  saveChangesButton.addEventListener("click", handleSaveChanges)
+  
+  return monumentFragment
+}
+
+
+
+// "name": "Chimney Rock",
+// "state": "CO",
+// "area": 4724,
+// "dateEstablished": "09-21-2012",
+// "visited": false

@@ -1,12 +1,12 @@
 {
   "parks": [
     {
-      "id": 1,
       "name": "Jackson Hole",
       "state": "WY",
-      "latitude": 43.582767,
-      "longitude": -110.821999,
-      "visited": true
+      "latitude": "43.582767",
+      "longitude": "-110.821999",
+      "visited": false,
+      "id": 1
     },
     {
       "id": 2,

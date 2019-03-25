@@ -8,7 +8,7 @@
     },
     "rules": {
         "semi": 0,
-        "quotes": ["error", "double"],
+        // "quotes": ["error", "double"],
         "eqeqeq": 2,
         // "no-trailing-spaces": 2
     }

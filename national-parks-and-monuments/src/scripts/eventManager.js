@@ -48,7 +48,7 @@ const handleUpdate = () => {
   const editedParkLongitude = document.querySelector(`#edit-longitude--${parkId}`);
   let radioButtonValue = document.querySelector('input[name="test"]:checked').value;
 
-  radioButtonValue = (radioButtonValue == "true")
+  radioButtonValue = (radioButtonValue === "true")
 
   console.log(radioButtonValue);
 
@@ -62,3 +62,57 @@ const handleUpdate = () => {
 
   putPark(parkId, editedPark).then(() => listNationalParks());
 };
+
+
+
+
+///////////////
+const monumentDelete = () => {
+  let monumentId = event.target.parentNode.id.split("--")[1]
+  console.log(event.target.parendNode.id.split("--")[1])
+
+  deleteMonument(monumentId)
+  .then(() => listMonuments())
+
+}
+
+const editMonumentForm = () => {
+  // console.log('hi')
+  let monumentId = event.target.parentNode.id.split("--")[1]
+  console.log(monumentId)
+
+  let article = document.querySelector(`#monument--${monumentId}`)
+  clearElement(article)
+
+  getMonument(monumentId)
+  .then(response => {
+    let newFrag = monumentForm(response)
+    article.appendChild(newFrag)
+
+  })
+}
+
+
+
+const handleSaveChanges = () => {
+  let monumentId = event.target.parentNode.id.split("--")[1]
+  console.log(monumentId)
+
+  let monumentNameValue = document.querySelector(`#edit-monument-name--${monumentId}`).value
+  let monumentStateValue = document.querySelector(`#edit-monument-state--${monumentId}`).value
+  let monumentAreaValue = document.querySelector(`#edit-monument-area--${monumentId}`).value
+  let monumentDateEstablishedValue = document.querySelector(`#edit-monument-dateEstablished--${monumentId}`).value
+  let monumentVisited = document.querySelector('input[name="test2"]:checked').value;
+
+  monumentVisited = (monumentVisited === "true")
+
+  let monumentObject = {
+    name: monumentNameValue,
+    state: monumentStateValue,
+    area: monumentAreaValue,
+    dateEstablished: monumentDateEstablishedValue,
+    visited: monumentVisited
+  }
+
+  putMonument(monumentId, monumentObject).then(() => listMonuments());
+}

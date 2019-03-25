@@ -23,3 +23,24 @@ const putPark = (parkId, updatedParkObject) => fetch(`${apiBaseUrl}/parks/${park
   },
   body: JSON.stringify(updatedParkObject)
 })
+
+
+
+
+////////////////
+const getAllMonuments = () => fetch(`${apiBaseUrl}/monuments`).then(response => response.json())
+
+const deleteMonument = (monumentId) => fetch(`${apiBaseUrl}/monuments/${monumentId}`, {
+  method: "DELETE"
+})
+
+const getMonument = (monumentId) => fetch(`${apiBaseUrl}/monuments/${monumentId}`).then(response => response.json())
+
+
+const putMonument = (monumentId, monumentObject) => fetch(`${apiBaseUrl}/monuments/${monumentId}`, {
+  method: "PUT",
+  headers: {
+    "content-type": "application/json"
+  },
+  body: JSON.stringify(monumentObject)
+})

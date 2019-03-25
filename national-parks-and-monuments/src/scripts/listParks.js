@@ -13,3 +13,24 @@ const listNationalParks = () => {
     nationalParksSection.appendChild(nationParksFragment)
   });
 };
+
+
+
+
+/////////
+const listMonuments = () => {
+  getAllMonuments().then(monumentArray => {
+    console.log(monumentArray)
+    let frag = document.createDocumentFragment();
+
+    monumentArray.forEach(monument => {
+      let monumentHTML = buildMonuments(monument);
+      frag.appendChild(monumentHTML);
+    });
+
+    const monumentSection = document.querySelector("#monument-container")
+    clearElement(monumentSection)
+    monumentSection.appendChild(frag)
+  })
+}
+
